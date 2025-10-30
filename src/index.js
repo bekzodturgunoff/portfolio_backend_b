@@ -29,6 +29,11 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: Date.now() });
 });
 
+// Simple root route to avoid "Cannot GET /" on base URL
+app.get('/', (_req, res) => {
+  res.json({ ok: true, service: 'portfolio-backend', docs: '/health, POST /api/contact' });
+});
+
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body || {};
   if (!name || !email || !message) {
